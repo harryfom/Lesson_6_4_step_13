@@ -1,13 +1,10 @@
 package ru.fomenko_iv;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.StreamTokenizer;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 /*
  Напишите программу, читающую из System.in текст в кодировке UTF-8, подсчитывающую в нем частоту появления слов, и в
@@ -61,10 +58,9 @@ public class Main {
         // Сложить в ХЭШ сразу с подсчетом вхождений
         HashMap<String, Integer> hashMap = new HashMap<>();
         scanner.forEachRemaining(n ->
-                hashMap.put(n.toLowerCase(),hashMap.get(n.toLowerCase()) == null ? 1 : hashMap.get(n.toLowerCase())+1));
+                hashMap.put(n.toLowerCase(), hashMap.get(n.toLowerCase()) == null ? 1 : hashMap.get(n.toLowerCase()) + 1));
 
         // Сортируем, ограничиваем кол-во, берем ключ и выводим
-
         hashMap.entrySet().stream()
                 .sorted(Comparator.<Map.Entry<String, Integer>>comparingInt(Map.Entry::getValue)
                         .reversed()  // Обратная сортировка по количеству
