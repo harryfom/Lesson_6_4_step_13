@@ -66,25 +66,11 @@ public class Main {
         // Сортируем, ограничиваем кол-во, берем ключ и выводим
 
         hashMap.entrySet().stream()
-                .sorted(new MyComparator())
+                .sorted(Comparator.<Map.Entry<String, Integer>>comparingInt(Map.Entry::getValue)
+                        .reversed()  // Обратная сортировка по количеству
+                        .thenComparing(Map.Entry::getKey))  // потом прямая по словам
                 .map(Map.Entry::getKey)
                 .limit(10)
                 .forEach(System.out::println);
     }
-//    public static class MyComparator implements Comparator{
-//        @Override
-//        public int compare(Object o1, Object o2) {
-//            if (o1 == o2){
-//                return 0;
-//            }
-//            Map.Entry<String,Integer> e1 = (Map.Entry<String,Integer>)o1;
-//            Map.Entry<String,Integer> e2 = (Map.Entry<String,Integer>)o2;
-//            int retval = e2.getValue().compareTo(e1.getValue());
-//            if (retval == 0) {
-//                retval = e1.getKey().compareTo(e2.getKey());
-//            }
-//            return retval;
-//        }
-//    }
-
 }
